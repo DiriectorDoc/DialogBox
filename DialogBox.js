@@ -27,22 +27,23 @@ var Forms = {
 			incr: {}
 		};
 		var tem = Forms.getOpenTemplate();
-		for(var e in tem.basic){
-			if (e.increment_group) {
+		console.log(tem);
+		for(var i in tem.basic){
+			if (tem.basic[i].increment_group) {
         		continue;
     		}
-			var fieldname = e.field;
+			var fieldname = tem.basic[i].field;
 			var field = $.trim($('#form-'+Forms.escStr(tem.shortform)+'-'+fieldname).val());
 			if (field) {
 				object.all[fieldname.toLocaleLowerCase()] = field;
 				object.basic[fieldname.toLocaleLowerCase()] = field;
 			}
 		}
-		for(var e in tem.extra){
-			if (e.increment_group) {
+		for(var i in tem.extra){
+			if (tem.extra[i].increment_group) {
         		continue;
     		}
-			var fieldname = e.field;
+			var fieldname = tem.extra[i].field;
 			var field = $.trim($('#form-'+Forms.escStr(tem.shortform)+'-'+fieldname).val());
 			if (field) {
 				object.all[fieldname.toLocaleLowerCase()] = field;
@@ -50,8 +51,8 @@ var Forms = {
 			}
 		}
 		for(var e in tem.incrementables){
-			for(var i = 1; i <= e.val; i++)
-				for(var j in e.fields){
+			for(var i = 1; i <= tem.incrementables[e].val; i++)
+				for(var j in tem.incrementables[e].fields){
 					var fieldname = j.field;
 					var fieldid = fieldname.replace('<N>', i.toString());
 					var field = $.trim($('#form-'+Forms.escStr(tem.shortform)+'-'+fieldid).val());
